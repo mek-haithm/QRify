@@ -34,7 +34,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
       final file = File(filePath);
       await file.writeAsBytes(pngBytes);
 
-      await Share.shareXFiles([XFile(filePath)], text: 'QR Code');
+      await Share.shareXFiles([XFile(filePath)], text: 'New QR Code');
     } catch (e) {
       ScaffoldMessenger.of(
         context,
