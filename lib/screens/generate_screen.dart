@@ -23,7 +23,8 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   Future<void> _shareQrCode() async {
     try {
-      final boundary = globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      final boundary =
+          globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
       final image = await boundary.toImage(pixelRatio: 3.0);
       final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       final pngBytes = byteData!.buffer.asUint8List();
@@ -35,9 +36,9 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
       await Share.shareXFiles([XFile(filePath)], text: 'QR Code');
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to share QR code: $e')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Failed to share QR code: $e')));
     }
   }
 
@@ -74,11 +75,15 @@ class _GenerateScreenState extends State<GenerateScreen> {
                   controller: _controller,
                   decoration: InputDecoration(
                     hintText: 'Enter a URL (e.g., https://example.com)',
-                    hintStyle: TextStyle(color: isDark ? Colors.grey[600] : Colors.grey[400]),
+                    hintStyle: TextStyle(
+                      color: isDark ? Colors.grey[600] : Colors.grey[400],
+                    ),
                     border: InputBorder.none,
                     contentPadding: const EdgeInsets.all(16),
                   ),
-                  style: TextStyle(color: isDark ? Colors.grey[100] : Colors.grey[900]),
+                  style: TextStyle(
+                    color: isDark ? Colors.grey[100] : Colors.grey[900],
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
@@ -99,7 +104,10 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 shadowColor: isDark ? Colors.black54 : Colors.grey[400]!,
                 depth: 5,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 16,
+                    horizontal: 24,
+                  ),
                   child: Text(
                     'Generate',
                     style: TextStyle(
@@ -130,7 +138,10 @@ class _GenerateScreenState extends State<GenerateScreen> {
                       data: qrData!,
                       version: QrVersions.auto,
                       size: 200.0,
-                      foregroundColor: Colors.black,
+                      dataModuleStyle: const QrDataModuleStyle(
+                        dataModuleShape: QrDataModuleShape.square,
+                        color: Colors.black,
+                      ),
                       backgroundColor: Colors.white,
                     ),
                   ),
@@ -144,7 +155,10 @@ class _GenerateScreenState extends State<GenerateScreen> {
                   shadowColor: isDark ? Colors.black54 : Colors.grey[400]!,
                   depth: 5,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 20,
+                    ),
                     child: Text(
                       'Share',
                       style: TextStyle(
